@@ -1,5 +1,6 @@
 # How to install Epson L380 and L382 drivers on Linux
-# Get the .src.rpm package from [EPSON][epson]
+
+## Get the .src.rpm package from [EPSON][epson]
 
 ## Install dependencies
 The names may vary depending on the distribution
