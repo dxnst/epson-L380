@@ -1,0 +1,27 @@
+Open your terminal and run the following commands
+=================================================
+
+rpmextract epson-inkjet-printer-201601w-1.0.0-1lsb3.2.src.rpm
+
+tar xvf epson-inkjet-printer-201601w-1.0.0.tar.gz
+tar xvf epson-inkjet-printer-filter-1.0.0.tar.gz
+
+cd epson-inkjet-printer-filter-1.0.0
+aclocal
+libtoolize
+chmod +x configure
+./configure LDFLAGS="$LDFLAGS -Wl,--no-as-needed" --prefix=/opt/epson-inkjet-printer-201601w
+make
+
+cd ..
+cd epson-inkjet-printer-201601w-1.0.0
+sudo install -d /opt/epson-inkjet-printer-201601w
+sudo cp -a --no-preserve=mode lib64 /opt/epson-inkjet-printer-201601w
+sudo cp -a --no-preserve=mode resource /opt/epson-inkjet-printer-201601w
+sudo install -d /usr/share/cups/model/epson-inkjet-printer-201601w
+sudo install -m 644 ppds/* /usr/share/cups/model/epson-inkjet-printer-201601w
+
+cd ..
+cd epson-inkjet-printer-filter-1.0.0
+sudo install -d /opt/epson-inkjet-printer-201601w/cups/lib/filter
+sudo install -m 755 src/epson_inkjet_printer_filter /opt/epson-inkjet-printer-201601w/cups/lib/filter/epson_inkjet_printer_filter
